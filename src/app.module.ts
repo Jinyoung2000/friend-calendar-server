@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import User from './user/user.entity';
+import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigurationModule } from './config/configuration';
 
@@ -12,7 +13,6 @@ import { ConfigurationModule } from './config/configuration';
     TypeOrmModule.forRootAsync({
       imports: [ConfigurationModule],
       inject: [ConfigService],
-      // FIXME: env 사용
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         port: 3306,
@@ -26,6 +26,7 @@ import { ConfigurationModule } from './config/configuration';
     }),
     ConfigModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
