@@ -24,4 +24,15 @@ export class UserService {
       },
     });
   }
+
+  async findUserByEmail(
+    email: string,
+  ): Promise<Omit<User, 'password'> | undefined> {
+    const { password, ...userInfo } = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+    return userInfo;
+  }
 }

@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { ConfigurationModule } from 'src/config/configuration';
 import { UserModule } from 'src/user/user.module';
 import { AuthService } from './auth.service';
+import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 
 @Module({
@@ -17,12 +18,12 @@ import { LocalStrategy } from './local.strategy';
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('SECRET_KEY'),
         signOptions: {
-          expiresIn: 60,
+          expiresIn: '3600s',
         },
       }),
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}
