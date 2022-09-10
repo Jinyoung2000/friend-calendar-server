@@ -1,6 +1,6 @@
 ## Description
 
-프렌드다이어리 서버
+프렌드캘린더 서버
 
 ## Installation
 
