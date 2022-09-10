@@ -27,13 +27,4 @@ export class UserService {
       },
     });
   }
-
-  async findUserByEmail(email: string) {
-    const { password, ...userInfo } = await this.userRepository.findOne({
-      where: {
-        email,
-      },
-    });
-    return userInfo;
-  }
 }
