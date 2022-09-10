@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { LoginDto } from './dtos/login.dto';
 import User from './user.entity';
 
 @Injectable()
@@ -12,8 +11,12 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  async createUser(user: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<void> {
     // TODO: 비밀번호 암호화 필요
+    const user = new User();
+    user.name = createUserDto.name;
+    user.email = createUserDto.email;
+    user.password = createUserDto.password;
     await this.userRepository.save(user);
   }
 
@@ -25,9 +28,7 @@ export class UserService {
     });
   }
 
-  async findUserByEmail(
-    email: string,
-  ): Promise<Omit<User, 'password'> | undefined> {
+  async findUserByEmail(email: string) {
     const { password, ...userInfo } = await this.userRepository.findOne({
       where: {
         email,
