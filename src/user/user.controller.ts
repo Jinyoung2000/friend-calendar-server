@@ -10,10 +10,4 @@ export class UserController {
   async signUp(@Body() body: CreateUserDto) {
     return this.userService.create(body);
   }
-
-  @UseGuards(JwtAuthGuard)
-  @Get(':email')
-  async getUser(@Param('email') email: string) {
-    return this.userService.findUserByEmail(email);
-  }
 }

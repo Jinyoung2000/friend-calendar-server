@@ -29,8 +29,11 @@ export class AuthService {
       email: account.email,
       password: account.password,
     };
+    const user = await this.userService.findOne(account.email);
     return {
       access_token: this.jwtService.sign(payload),
+      name: user.name,
+      email: user.email,
     };
   }
 }
