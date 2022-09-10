@@ -7,8 +7,8 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
   @Post('/sign-up')
-  async createUser(@Body() body: CreateUserDto): Promise<void> {
-    return this.userService.createUser(body);
+  async signUp(@Body() body: CreateUserDto) {
+    return this.userService.create(body);
   }
 
   @UseGuards(JwtAuthGuard)
