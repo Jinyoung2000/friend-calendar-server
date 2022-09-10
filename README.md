@@ -1,6 +1,6 @@
 ## Description
 
-메모장앱 서버
+프렌드다이어리 서버
 
 ## Installation
 
